@@ -12,15 +12,16 @@ requirements:
   DockerRequirement:
     dockerPull: ghcr.io/biosciencedbc/jga-analysis/manta:1.0.0
   ShellCommandRequirement: {}
+  InlineJavascriptRequirement: {}
   EnvVarRequirement:
     envDef:
       REFERENCE: $(inputs.reference.path)
       BAM: $(inputs.cram.path)
-      NUM_THREADS: $(inputs.num_threads)
+      NUM_THREADS: $(String(inputs.num_threads))
       CONFIG_MANTA_OPTION: $(inputs.config_manta_option)
       WORKFLOW_OPTION: $(inputs.workflow_option)
 
-baseCommand: [ bash, /tools/manta-germline.sh ]
+baseCommand: [bash, /tools/manta-germline.sh]
 
 inputs:
   reference:
@@ -39,10 +40,10 @@ inputs:
     default: 1
   config_manta_option:
     type: string
-    default: ''
+    default: ""
   workflow_option:
     type: string
-    default: ''
+    default: ""
 
 outputs:
   alignmentStatsSummary:
