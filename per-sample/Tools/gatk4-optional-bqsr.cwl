@@ -31,7 +31,7 @@ requirements:
         )
       OUT_PREFIX: $(inputs.outprefix)
 
-baseCommand: [ bash, /tools/optional-bqsr.sh ]
+baseCommand: [bash, /tools/optional-bqsr.sh]
 
 inputs:
   use_bqsr:

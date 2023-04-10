@@ -11,15 +11,16 @@ $namespaces:
 requirements:
   DockerRequirement:
     dockerPull: ghcr.io/biosciencedbc/jga-analysis/fastq2cram-bqsr-haplotypecaller:1.0.0
+  InlineJavascriptRequirement: {}
   EnvVarRequirement:
     envDef:
       VCF: $(inputs.vcf.path)
-      NUM_THREADS: $(inputs.num_threads)
+      NUM_THREADS: $(String(inputs.num_threads))
   ResourceRequirement:
     ramMin: $(inputs.ram_min)
     coresMin: $(inputs.num_threads)
 
-baseCommand: [ bash, /tools/bgzip.sh ]
+baseCommand: [bash, /tools/bgzip.sh]
 
 inputs:
   vcf:

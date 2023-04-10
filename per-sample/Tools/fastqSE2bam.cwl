@@ -9,28 +9,29 @@ $namespaces:
   edam: http://edamontology.org/
 
 requirements:
+  InlineJavascriptRequirement: {}
   EnvVarRequirement:
     envDef:
       REFERENCE: $(inputs.reference.path)
       FASTQ1: $(inputs.fastq.path)
-      FASTQ2: ''
+      FASTQ2: ""
       RG_ID: $(inputs.RG_ID)
       RG_PL: $(inputs.RG_PL)
       RG_PU: $(inputs.RG_PU)
       RG_LB: $(inputs.RG_LB)
       RG_SM: $(inputs.RG_SM)
       BAM: $(inputs.outprefix).bam
-      BWA_BASES_PER_BATCH: $(inputs.bwa_bases_per_batch)
-      BWA_NUM_THREADS: $(inputs.bwa_num_threads)
+      BWA_BASES_PER_BATCH: $(String(inputs.bwa_bases_per_batch))
+      BWA_NUM_THREADS: $(String(inputs.bwa_num_threads))
       SORTSAM_JAVA_OPTIONS: $(inputs.sortsam_java_options)
-      SORTSAM_MAX_RECORDS_IN_RAM: $(inputs.sortsam_max_records_in_ram)
+      SORTSAM_MAX_RECORDS_IN_RAM: $(String(inputs.sortsam_max_records_in_ram))
   DockerRequirement:
     dockerPull: ghcr.io/biosciencedbc/jga-analysis/fastq2cram-bqsr-haplotypecaller:1.1.3
   ResourceRequirement:
     ramMin: $(inputs.fastq2bam_ram_min)
     coresMin: $(inputs.bwa_num_threads)
 
-baseCommand: [ bash, /tools/fastq2bam.sh ]
+baseCommand: [bash, /tools/fastq2bam.sh]
 
 inputs:
   reference:
@@ -67,7 +68,7 @@ inputs:
     type: string
   fastq2bam_ram_min:
     type: int
-    doc: size of RAM (in MB) to be specified in 
+    doc: size of RAM (in MB) to be specified in
     default: 48000
   bwa_num_threads:
     type: int

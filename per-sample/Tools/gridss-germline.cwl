@@ -11,18 +11,19 @@ $namespaces:
 requirements:
   DockerRequirement:
     dockerPull: ghcr.io/biosciencedbc/jga-analysis/gridss:1.0.0
+  InlineJavascriptRequirement: {}
   EnvVarRequirement:
     envDef:
       BAM: $(inputs.bam.path)
       VCF: $(inputs.bam.nameroot).gridss.vcf
       ASSEMBLY: $(inputs.bam.nameroot).assembly.bam
       REFERENCE: $(inputs.reference.path)
-      NUM_THREADS: $(inputs.num_threads)
+      NUM_THREADS: $(String(inputs.num_threads))
       GRIDSS_JAR: /opt/gridss/gridss-2.9.4-gridss-jar-with-dependencies.jar
       JAVA_TOOL_OPTIONS: $(inputs.java_tool_options)
       JVM_HEAP: $(inputs.jvm_heap)
 
-baseCommand: [ bash, /tools/gridss-germline.sh ]
+baseCommand: [bash, /tools/gridss-germline.sh]
 
 inputs:
   reference:
@@ -44,7 +45,7 @@ inputs:
     default: 1
   java_tool_options:
     type: string
-    default: ''
+    default: ""
   jvm_heap:
     type: string
     default: 25g

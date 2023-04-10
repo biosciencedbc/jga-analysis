@@ -15,9 +15,9 @@ requirements:
     envDef:
       VCF_GZ: $(inputs.vcf_gz.path)
   InitialWorkDirRequirement:
-    listing: [ $(inputs.vcf_gz) ]
+    listing: [$(inputs.vcf_gz)]
 
-baseCommand: [ bash, /tools/tabix.sh ]
+baseCommand: [bash, /tools/tabix.sh]
 
 inputs:
   vcf_gz:
